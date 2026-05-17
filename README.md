@@ -41,7 +41,7 @@ for testing). It stores the history of the experiment into `V_history` and `t_hi
 
 ### Testing
 
-`testing.py` which conducts tests on various functions in the project. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values.
+`testing.py` which conducts tests on various functions in the project. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
 
 ## What is yet to be implemented:
 
