@@ -1,5 +1,3 @@
-from steady_state import m_inf, h_inf, n_inf
-
 # CONSTANTS
 E_Na = 50
 g_Na = 120
@@ -38,14 +36,3 @@ def leaky_channel(V):
     | E_L | −54.4 mV | Leak reversal potential |
     """
     return g_L * (V - (E_L))
-
-# Test at steady-state gating and resting voltage
-# V=-65
-# print(f"Expected: Negative value, Got: {sodium_channel(V=V, m=m_inf(V=V), h=h_inf(V=V))}")
-# print(f"Expected: Positive value, Got: {potassium_channel(V=V, n=n_inf(V=V))}")
-
-# I_Na = sodium_channel(V=V, m=m_inf(V=V), h=h_inf(V=V))
-# I_K = potassium_channel(V=V, n=n_inf(V=V))
-# I_L = leaky_channel(V=V)
-
-# print(f"Expected: 0, Got: {round(I_Na + I_K + I_L,0)}")
