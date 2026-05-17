@@ -12,7 +12,7 @@ def I_ext(t):
     else:
         return 0
 
-def dynamical_system(t, state):
+def dynamical_system(t, state, I_ext_function):
     """
     dV/dt = (I_ext(t) − I_Na − I_K − I_L) / C_m
     dm/dt = α_m(V)(1 − m) − β_m(V) m
@@ -30,7 +30,7 @@ def dynamical_system(t, state):
     I_Na = sodium_channel(V=state[0], m=state[1], h=state[2])
     I_K = potassium_channel(V=state[0], n=state[3])
     I_L = leaky_channel(V=state[0])
-    dV_dt = (I_ext(t) - I_Na - I_K - I_L) / C_m
+    dV_dt = (I_ext_function(t) - I_Na - I_K - I_L) / C_m
     
     # Calculate the gating ODEs
     dm_dt = m_gating(V=state[0], m=state[1])
