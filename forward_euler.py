@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from dynamical_system import dynamical_system
 from steady_state import m_inf, h_inf, n_inf
 
-def forward_euler(T_end, dt, initial_state):
+def forward_euler(T_end, dt, initial_state, I_ext_function):
     """
     state(t + dt) = state(t) + dt · derivatives(t, state)
 
@@ -23,7 +23,7 @@ def forward_euler(T_end, dt, initial_state):
     n_steps = int(T_end / dt)
     for i in range(n_steps):
         t = i * dt
-        derivatives = dynamical_system(t=t,state=current_state)
+        derivatives = dynamical_system(t=t,state=current_state, I_ext_function=I_ext_function)
         V_new = current_state[0] + dt * derivatives[0]
         m_new = current_state[1] + dt * derivatives[1]
         h_new = current_state[2] + dt * derivatives[2]
@@ -44,9 +44,9 @@ def forward_euler(T_end, dt, initial_state):
 
 
 
-# Testing params: T_end = 50 ms, dt = 0.01 ms, initial state = (V_rest, m_∞(V_rest), h_∞(V_rest), n_∞(V_rest)).
+# Action potential init:
 T_end = 50
 dt = 0.01
 V_rest = -65
 initial_state=(V_rest, m_inf(V_rest), h_inf(V_rest), n_inf(V_rest))
-forward_euler(T_end=T_end, dt=dt, initial_state=initial_state)
+forward_euler(T_end=T_end, dt=dt, initial_state=initial_state, I_ext_function=lambda t: 10 if 4 < t < 7 else 0)
