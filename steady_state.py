@@ -47,13 +47,3 @@ def tau_n(V):
     τ_x = 1/(α+β)
     """
     return 1 / (alpha_n(V) + beta_n(V))
-
-# V = -65
-# print(f"Expected: 0.0529, Got: {round(m_inf(V=V), 4)}")
-# print(f"Expected: 0.596, Got: {round(h_inf(V=V), 3)}")
-# print(f"Expected: 0.318, Got: {round(n_inf(V=V),3)}")
-# print(f"Expected: 0.237 ms, Got: {round(tau_m(V), 3)} ms") # FAST
-# print(f"Expected: 8.52 ms, Got: {round(tau_h(V),3)} ms") # SLOW
-# print(f"Expected: 5.46 ms, Got: {round(tau_n(V), 3)} ms") # MEDIUM
-
-# This interplay of different rates is what pushes the action-potential
