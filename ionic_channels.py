@@ -1,4 +1,4 @@
-from steady_state_values import m_inf, h_inf, n_inf
+from steady_state import m_inf, h_inf, n_inf
 
 # CONSTANTS
 E_Na = 50
