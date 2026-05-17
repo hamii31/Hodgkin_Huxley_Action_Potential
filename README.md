@@ -56,3 +56,7 @@ git clone <repo>
 pip install matplotlib
 python forward_euler.py
 ```
+
+## License
+
+MIT License
