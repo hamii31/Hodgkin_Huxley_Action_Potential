@@ -3,15 +3,6 @@ from gating_ODEs import m_gating, h_gating, n_gating
 
 C_m = 1.0
 
-def I_ext(t):
-    """
-    The exteriorly-injected current by the experimenter.
-    """
-    if t > 4 and t < 7:
-        return 10
-    else:
-        return 0
-
 def dynamical_system(t, state, I_ext_function):
     """
     dV/dt = (I_ext(t) − I_Na − I_K − I_L) / C_m
