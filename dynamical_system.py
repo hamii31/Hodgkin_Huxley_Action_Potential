@@ -1,12 +1,12 @@
-from steady_state import m_inf, h_inf, n_inf
 from ionic_currents import sodium_channel, potassium_channel, leaky_channel
-from gating_ODEs import m_gradient, h_gradient, n_gradient
+from gating_ODEs import m_gating, h_gating, n_gating
 
-# CONSTANTS
 C_m = 1.0
 
 def I_ext(t):
-    print(t)
+    """
+    The exteriorly-injected current by the experimenter.
+    """
     if t > 4 and t < 7:
         return 10
     else:
@@ -33,17 +33,8 @@ def dynamical_system(t, state):
     dV_dt = (I_ext(t) - I_Na - I_K - I_L) / C_m
     
     # Calculate the gating ODEs
-    dm_dt = m_gradient(V=state[0], m=state[1])
-    dh_dt = h_gradient(V=state[0], h=state[2])
-    dn_dt = n_gradient(V=state[0], n=state[3])
+    dm_dt = m_gating(V=state[0], m=state[1])
+    dh_dt = h_gating(V=state[0], h=state[2])
+    dn_dt = n_gating(V=state[0], n=state[3])
 
     return dV_dt, dm_dt, dh_dt, dn_dt
-
-
-# V = -65
-# state = (V, m_inf(V=V), h_inf(V=V), n_inf(V=V))
-# derivatives = dynamical_system(t=0.00, state=state)
-# print(f"Expected dV/dt: 0, Got: {round(derivatives[0],1)}")
-# print(f"Expected dm/dt: 0, Got: {derivatives[1]}")
-# print(f"Expected dh/dt: 0, Got: {derivatives[2]}")
-# print(f"Expected dn/dt: 0, Got: {derivatives[3]}")
