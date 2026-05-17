@@ -45,8 +45,8 @@ def forward_euler(T_end, dt, initial_state):
 
 
 # Testing params: T_end = 50 ms, dt = 0.01 ms, initial state = (V_rest, m_∞(V_rest), h_∞(V_rest), n_∞(V_rest)).
-# T_end = 50
-# dt = 0.01
-# V_rest = -65
-# initial_state=(V_rest, m_inf(V_rest), h_inf(V_rest), n_inf(V_rest))
-# forward_euler(T_end=T_end, dt=dt, initial_state=initial_state)
+T_end = 50
+dt = 0.01
+V_rest = -65
+initial_state=(V_rest, m_inf(V_rest), h_inf(V_rest), n_inf(V_rest))
+forward_euler(T_end=T_end, dt=dt, initial_state=initial_state)
