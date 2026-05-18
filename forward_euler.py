@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 from dynamical_system import dynamical_system
-from steady_state_values import m_inf, h_inf, n_inf
+from steady_state import m_inf, h_inf, n_inf
 
 def forward_euler(T_end, dt, initial_state, I_ext_function):
     """
