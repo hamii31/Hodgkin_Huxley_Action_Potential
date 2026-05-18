@@ -14,6 +14,10 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 *A subthreshold response observed when the membrane potential is less than the threshold for setting up a spike*
 
+![Refractory Period](figures/Figure_3.png)
+
+*Refractory period observed within a 15ms gap after the previous action potential, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
+
 **Language:** Python 3.14.0 (Matplotlib, Numpy)
 **Reference:** Hodgkin AL, Huxley AF (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. Journal of Physiology 117:500–544. [(DOI)](https://doi.org/10.1113/jphysiol.1952.sp004764)
 
@@ -47,26 +51,35 @@ by the experiment-conductor.
 `forward_euler.py` combines everything into a working action-potential generating model, that calculates the current state by envoking `dynamical_system.py` on every dt step (0.01ms
 for testing). It stores the history of the experiment into `V_history` and `t_history`, which are later plotted into a figure for visual demonstration of the action-potential.
 
-### Threshold for firing
+### Threshold Experiment
 
-`threshold.py` iterates through increments of the injected µA in range 0 to 10 in order to find the µA value at which the action potential is initialized.
+`threshold.py` iterates through increments of the injected µA in range 0 to 10 in order to find the µA value at which the action potential is initialized. `np.arange` is used for fine
+iteration (several digits after the decimal point).
+
+### Subthreshold Experiment
+
+`subthreshold.py` finds the µA that generates the last subthreshold before a real AP can be fired. The iteration follows the same logic as `threshold.py`, but it retrieves the subthreshold that predates the AP threshold and is then used to generate the subthreshold plot.
+
+### Refractory Period Experiment
+`refractory_period.py` conducts an experiment which aims to discover the timeframe in which a second AP can be generated after the initial AP. Hodgkin-Huxley's paper tracked the gap by observing the h and n between the two APs, which this implementation shows in action. The sodium inactivation and potassium conductance are tracked and plotted alongside the APs, the final product closely resembles the graph (Fig 19) in the paper. This experiment demonstrates that potassium conductance reaches resting levels after an AP and that the sodium channels must recover from inactivation (h returning to near-rest values) before another AP can fire.
+
+### Plotting
+`plot.py` holds all of the plotting functions in this projects.
 
 ### Testing
 
-`testing.py` which conducts tests on various functions in the project. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
-
-
+`testing.py` which conducts tests `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
 
 ## What is yet to be implemented:
 
-- A function that finds the refractory period
+- Repetitive firing under sustained current
 
 ## How to run:
 
 ```
 git clone <repo>
 pip install matplotlib
-python forward_euler.py
+python <project.py>
 ```
 
 ## License
