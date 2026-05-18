@@ -56,7 +56,6 @@ for testing). It stores the history of the experiment into `V_history` and `t_hi
 ## What is yet to be implemented:
 
 - A function that finds the refractory period
-- Reimplement integration with a fourth-order Runge-Kutta scheme
 
 ## How to run:
 
