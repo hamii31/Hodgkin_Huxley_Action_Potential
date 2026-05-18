@@ -1,6 +1,6 @@
 # Hodgkin Huxley Action Potential
 
-This is my implementation of the 1952 Hodgkin and Huxley paper describing the generation of action-potentials in neurons. 
+This is my implementation of the 1952 Hodgkin and Huxley paper describing the generation of action-potentials in neurons. All of the information is derived from the 1952 paper.
 
 ![Action potential](figures/Figure_1.png)
 
@@ -31,7 +31,7 @@ alpha_n -> A solution that checks the current voltage and returns a hardcoded va
 
 ### steady_state
 
-The `steady_state.py` contains the functions that calculate the steady state values of each gate and the timeframe in which they open/close, derived from the rate constants by setting dx/dt = 0. This script demonstrates the different timing of each gate, which is necessary for the action-potentials. 
+The `steady_state.py` contains the functions that calculate the steady state values of each gate and the timeframe in which they open/close, derived from the rate constants by setting dx/dt = 0.
 
 ### gating_ODEs
 
@@ -48,8 +48,7 @@ by the experiment-conductor.
 
 ### forward_euler
 
-`forward_euler.py` combines everything into a working action-potential generating model, that calculates the current state by envoking `dynamical_system.py` on every dt step (0.01ms
-for testing). It stores the history of the experiment into `V_history` and `t_history`, which are later plotted into a figure for visual demonstration of the action-potential.
+`forward_euler.py` calculates the current state by envoking `dynamical_system.py` on every dt step (0.01ms for testing). It stores the history of the experiment into `V_history`, `t_history`, `m_history`, `h_history` and `n_history`, which are used in the experiments later on
 
 ### Threshold Experiment
 
@@ -68,7 +67,7 @@ iteration (several digits after the decimal point).
 
 ### Testing
 
-`testing.py` which conducts tests `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
+`testing.py` validates `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
 
 ## What is yet to be implemented:
 
