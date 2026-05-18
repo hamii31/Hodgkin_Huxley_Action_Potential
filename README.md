@@ -48,7 +48,7 @@ by the experiment-conductor.
 
 ### forward_euler
 
-`forward_euler.py` calculates the current state by envoking `dynamical_system.py` on every dt step (0.01ms for testing). It stores the history of the experiment into `V_history`, `t_history`, `m_history`, `h_history` and `n_history`, which are used in the experiments later on
+`forward_euler.py` calculates the current state by invoking `dynamical_system.py` on every dt step (0.01ms for testing). It stores the history of the experiment into `V_history`, `t_history`, `m_history`, `h_history` and `n_history`, which are used in the experiments later on
 
 ### Threshold Experiment
 
@@ -63,15 +63,15 @@ iteration (several digits after the decimal point).
 `refractory_period.py` conducts an experiment which aims to discover the timeframe in which a second AP can be generated after the initial AP. Hodgkin-Huxley's paper tracked the gap by observing the h and n between the two APs, which this implementation shows in action. The sodium inactivation and potassium conductance are tracked and plotted alongside the APs, the final product closely resembles the graph (Fig 19) in the paper. This experiment demonstrates that potassium conductance reaches resting levels after an AP and that the sodium channels must recover from inactivation (h returning to near-rest values) before another AP can fire.
 
 ### Plotting
-`plot.py` holds all of the plotting functions in this projects.
+`plot.py` holds all of the plotting functions in this project.
 
 ### Testing
 
-`testing.py` validates `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
+`testing.py` validates `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is compared with the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
 
 ## Key observations:
 
-- The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with a all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
+- The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with an all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
 - The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
 
 ## What is yet to be implemented:
