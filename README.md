@@ -10,6 +10,10 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 *The initialization of an action potential as a result of passing the pulse threshold (6.98 µA/cm^2, injected for 1ms)*
 
+![Subthreshold Responses](figures/Figure_4.png)
+
+*A subthreshold response observed when the membrane potential is less than the threshold for setting up a spike*
+
 **Language:** Python 3.14.0 (Matplotlib, Numpy)
 **Reference:** Hodgkin AL, Huxley AF (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. Journal of Physiology 117:500–544. [(DOI)](https://doi.org/10.1113/jphysiol.1952.sp004764)
 
