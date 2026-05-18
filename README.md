@@ -69,6 +69,11 @@ iteration (several digits after the decimal point).
 
 `testing.py` validates `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is put againts the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
 
+## Key observations:
+
+- The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with a all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
+- The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
+
 ## What is yet to be implemented:
 
 - Repetitive firing under sustained current
