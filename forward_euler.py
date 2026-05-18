@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 from dynamical_system import dynamical_system
-from steady_state import m_inf, h_inf, n_inf
+from steady_state_values import m_inf, h_inf, n_inf
 
 def forward_euler(T_end, dt, initial_state, I_ext_function):
     """
@@ -35,13 +35,7 @@ def forward_euler(T_end, dt, initial_state, I_ext_function):
         t_history.append(t)
         V_history.append(V_new)
 
-
-    plt.plot(t_history, V_history)
-    plt.xlabel('time (ms)')
-    plt.ylabel('V (mV)')
-    plt.ylim(-80, 60)
-    plt.show()
-
+    return V_history, t_history
 
 
 # Action potential init:
@@ -49,4 +43,11 @@ T_end = 50
 dt = 0.01
 V_rest = -65
 initial_state=(V_rest, m_inf(V_rest), h_inf(V_rest), n_inf(V_rest))
-forward_euler(T_end=T_end, dt=dt, initial_state=initial_state, I_ext_function=lambda t: 10 if 4 < t < 7 else 0)
+V_history, t_history = forward_euler(T_end=T_end, dt=dt, initial_state=initial_state, I_ext_function=lambda t: 10 if 4 < t < 7 else 0)
+
+plt.suptitle("Action potential initialization")
+plt.plot(t_history, V_history)
+plt.xlabel('time (ms)')
+plt.ylabel('V (mV)')
+plt.ylim(-80, 60)
+plt.show()
