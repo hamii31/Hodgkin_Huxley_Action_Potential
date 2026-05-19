@@ -16,7 +16,7 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 ![Refractory Period](figures/Figure_3.png)
 
-*Refractory period observed within a 15ms gap after the previous action potential, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
+*Refractory period observed within a 15ms gap after the previous action potential generated at 10 μA/cm^2, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
 
 **Language:** Python 3.14.0 (Matplotlib, Numpy)
 **Reference:** Hodgkin AL, Huxley AF (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. Journal of Physiology 117:500–544. [(DOI)](https://doi.org/10.1113/jphysiol.1952.sp004764)
