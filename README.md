@@ -18,7 +18,7 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 *Refractory period observed within a 15ms gap after the previous action potential generated at 9.5 μA/cm^2, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
 
-![Oscillation Experiment](figures/Figure_5.png)
+![Oscillation Experiment](figures/Figure_5_v2.png)
 
 *Oscillation occured under a constant current of 7 μA/cm^2*
 
