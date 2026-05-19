@@ -1,5 +1,7 @@
 # Hodgkin Huxley Action Potential
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20284016.svg)](https://doi.org/10.5281/zenodo.20284016)
+
 This is my first computational neuroscience project - a Python implementation of the 1952 Hodgkin and Huxley paper describing the generation of action potentials in neurons. All formulas are taken directly from the paper. The implementation was guided by an exercise sheet that decomposed the paper into validated steps. However all code, derivations, debugging, and experimental interpretation are my own work.
 
 ![Action potential](figures/action_potential.png)
