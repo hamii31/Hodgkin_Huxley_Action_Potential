@@ -89,7 +89,7 @@ iteration (several digits after the decimal point).
 
 ```
 git clone https://github.com/hamii31/Hodgkin_Huxley_Action_Potential.git
-pip install matplotlib
+pip install matplotlib numpy
 
 # to reproduce a single action potential
 python forward_euler.py
