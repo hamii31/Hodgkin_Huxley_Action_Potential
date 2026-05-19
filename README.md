@@ -25,7 +25,7 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 **Language:** Python 3.14.0 (Matplotlib, Numpy)
 **Reference:** Hodgkin AL, Huxley AF (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. Journal of Physiology 117:500–544. [(DOI)](https://doi.org/10.1113/jphysiol.1952.sp004764)
 
-## What has been implemented so far:
+## What has been implemented:
 
 ### rate_constants
 
@@ -85,16 +85,26 @@ iteration (several digits after the decimal point).
 - The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - the sodium and potassium reached the levels needed for an AP to fire, however the 9.5 μA were just enough for the AP to fire. Anything less would have resulted in a subthreshold graph instead.
 - In the oscillation experiment, sustained currents below 6 μA produce only a transient response (one or two APs followed by a membrane voltage at rest), while sustained currents at or above 7 μA produce continuous repetitive firing. The major difference between these two firing modes is characteristic for Type II neurons.
 
-## What is left to be implemented:
-
-- A Jupyter notebook for easier recreation of the experiments.
-
 ## How to run:
 
 ```
 git clone <repo>
 pip install matplotlib
-python <project.py>
+
+# to reproduce a single action potential
+python forward_euler.py
+
+# to reproduce the threshold experiment
+python threshold.py
+
+# to reproduce the subthreshold experiment
+python subthreshold.py
+
+# to reproduce the refractory experiment
+python refractory_period.py
+
+# to reproduce the oscillation experiment
+python oscillation.py
 ```
 
 ## License
