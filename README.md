@@ -83,7 +83,7 @@ iteration (several digits after the decimal point).
 - The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with an all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
 - The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
 - The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - the sodium and potassium reached the levels needed for an AP to fire, however the 9.5 μA were just enough for the AP to fire. Anything less would have resulted in a subthreshold graph instead.
-- In the oscillation experiment, a constant current of 3 μA is enough to drive an action potential, 6 μA are enough to reproduce the refractory experiment, and 7 μA is enough to start a rapid action potential firing.
+- In the oscillation experiment, sustained currents below 6 μA produce only a transient response (one or two APs followed by a membrane voltage at rest), while sustained currents at or above 7 μA produce continuous repetitive firing.
 
 ## What is left to be implemented:
 
