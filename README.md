@@ -10,7 +10,7 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 *The initialization of an action potential as a result of passing the pulse threshold (6.98 µA/cm^2, injected for 1ms)*
 
-![Subthreshold Responses](figures/Figure_3a_v2.png)
+![Subthreshold Responses](figures/subthreshold.png)
 
 *A subthreshold response observed when the membrane potential is less than the threshold for setting up a spike. It is apparent that the potassium conductance and sodium reserves were not enough for an AP to fire.*
 
