@@ -14,9 +14,9 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 *A subthreshold response observed when the membrane potential is less than the threshold for setting up a spike*
 
-![Refractory Period](figures/Figure_3.png)
+![Refractory Period](figures/Figure_3a.png)
 
-*Refractory period observed within a 15ms gap after the previous action potential generated at 10 μA/cm^2, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
+*Refractory period observed within a 15ms gap after the previous action potential generated at 9.5 μA/cm^2, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
 
 **Language:** Python 3.14.0 (Matplotlib, Numpy)
 **Reference:** Hodgkin AL, Huxley AF (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. Journal of Physiology 117:500–544. [(DOI)](https://doi.org/10.1113/jphysiol.1952.sp004764)
@@ -73,7 +73,7 @@ iteration (several digits after the decimal point).
 
 - The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with an all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
 - The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
-- The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - that is the all-or-nothing principle of the AP firing. It could not have fired earlier. 
+- The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - the sodium and potassium reached the levels needed for an AP to fire, however the 9.5 μA were just enough for the AP to fire. Anything less would have resulted in a subthreshold graph instead.
 
 ## What is yet to be implemented:
 
