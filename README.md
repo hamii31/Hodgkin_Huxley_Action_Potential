@@ -88,7 +88,7 @@ iteration (several digits after the decimal point).
 ## How to run:
 
 ```
-git clone <repo>
+git clone https://github.com/hamii31/Hodgkin_Huxley_Action_Potential.git
 pip install matplotlib
 
 # to reproduce a single action potential
