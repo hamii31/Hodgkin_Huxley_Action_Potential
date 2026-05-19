@@ -1,6 +1,6 @@
 # Hodgkin Huxley Action Potential
 
-This is my first computational neuroscience project - an implementation of the 1952 Hodgkin and Huxley paper describing the generation of action-potentials in neurons. All of the information is derived from the 1952 paper. I used help for the mathematical formulas, however the entirety of the project has been created by me.
+This is my first computational neuroscience project - a Python implementation of the 1952 Hodgkin and Huxley paper describing the generation of action potentials in neurons. All formulas are taken directly from the paper. The implementation was guided by an exercise sheet that decomposed the paper into validated steps. However all code, derivations, debugging, and experimental interpretation are my own work.
 
 ![Action potential](figures/action_potential.png)
 
