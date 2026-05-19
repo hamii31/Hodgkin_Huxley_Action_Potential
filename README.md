@@ -73,6 +73,7 @@ iteration (several digits after the decimal point).
 
 - The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with an all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
 - The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
+- The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - that is the all-or-nothing principle of the AP firing. It could not have fired earlier. 
 
 ## What is yet to be implemented:
 
