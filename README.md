@@ -60,10 +60,15 @@ iteration (several digits after the decimal point).
 `subthreshold.py` finds the µA that generates the last subthreshold before a real AP can be fired. The iteration follows the same logic as `threshold.py`, but it retrieves the subthreshold that predates the AP threshold and is then used to generate the subthreshold plot.
 
 ### Refractory Period Experiment
+
 `refractory_period.py` conducts an experiment which aims to discover the timeframe in which a second AP can be generated after the initial AP. Hodgkin-Huxley's paper tracked the gap by observing the h and n between the two APs, which this implementation shows in action. The sodium inactivation and potassium conductance are tracked and plotted alongside the APs, the final product closely resembles the graph (Fig 19) in the paper. This experiment demonstrates that potassium conductance reaches resting levels after an AP and that the sodium channels must recover from inactivation (h returning to near-rest values) before another AP can fire.
 
+### Oscillation Experiment
+
+`oscillation.py` applies a constant current to the forward Euler model, demonstrating the different frequency of action potentials fired at different constant microamps injected into the neuron.
+
 ### Plotting
-`plot.py` holds all of the plotting functions in this project.
+`plot.py` holds the plotting function.
 
 ### Testing
 
@@ -74,10 +79,11 @@ iteration (several digits after the decimal point).
 - The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with an all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
 - The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
 - The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - the sodium and potassium reached the levels needed for an AP to fire, however the 9.5 μA were just enough for the AP to fire. Anything less would have resulted in a subthreshold graph instead.
+- In the oscillation experiment, a constant current of 3 μA is enough to drive an action potential, 6 μA are enough to reproduce the refractory experiment, and 7 μA is enough to start a rapid action potential firing.
 
-## What is yet to be implemented:
+## What is left to be implemented:
 
-- Repetitive firing under sustained current
+- A Jupyter notebook for easier recreation of the experiments.
 
 ## How to run:
 
