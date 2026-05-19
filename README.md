@@ -14,7 +14,7 @@ This is my implementation of the 1952 Hodgkin and Huxley paper describing the ge
 
 *A subthreshold response observed when the membrane potential is less than the threshold for setting up a spike. It is apparent that the potassium conductance and sodium reserves were not enough for an AP to fire.*
 
-![Refractory Period](figures/Figure_3a.png)
+![Refractory Period](figures/refractory_period.png)
 
 *Refractory period observed within a 15ms gap after the previous action potential generated at 9.5 μA/cm^2, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
 
