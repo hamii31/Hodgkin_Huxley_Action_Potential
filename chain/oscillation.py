@@ -1,7 +1,7 @@
 import numpy as np
 
 from steady_state import m_inf, h_inf, n_inf
-from .multi_FE import forward_euler
+from .forward_euler import forward_euler
 from plot import plot_chain
 
 # Oscillation Experiment for multiple neurons
