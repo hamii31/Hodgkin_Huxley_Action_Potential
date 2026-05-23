@@ -1,6 +1,6 @@
 import numpy as np
 
-from steady_state_values import m_inf, h_inf, n_inf
+from steady_state import m_inf, h_inf, n_inf
 from forward_euler import forward_euler
 from plot import plot
 
