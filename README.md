@@ -125,7 +125,8 @@ The multi-neuron `threshold.py` finds the 1ms microamp pulse threshold at which 
 The multi-neuron `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
 
 ### Key observations:
-- The spike train propagation down the chain and the latency drift in spikes in the neurons as they get farther away in the chain from the initial neuron are visible in the Multi-neuron oscillation experiment.
+- The Multi-Neuron Threshold Experiment shows us how the first neuron receives just the right amount of current to fire an AP, however downstream neurons fire cleaner, more uniform spikes because each receives summed input from N_syn = 100 converging synapses, and because the synaptic gating saturates on spike detection — making the downstream response insensitive to the upstream spike's exact shape. This mimics how real synaptic transmission produces reliable downstream firing through synaptic convergence, even though individual synapses reduce the signal magnitude from input to output.
+- The spike train propagation down the chain and the latency drift in spikes in the neurons as they get farther away in the chain from the initial neuron are visible in the Multi-Neuron Oscillation Experiment.
 
 ## How to run:
 
