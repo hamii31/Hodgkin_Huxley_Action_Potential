@@ -97,7 +97,7 @@ iteration (several digits after the decimal point).
 
 ### Custom Forward Euler:
 
-The `forward_euler.py` in the `chain` folder takes the forward euler scheme and applies it to N neurons. A few new constants have been implemented: `s`, `E_syn`, `V_post` and `I_syn`, where `s` is the synapse update rule and is saturated at 1 (min(s+1,1)) when a spike is detected and is at constant exponential decay despite the spikes (ds/dt = −s/τ_syn). `E_syn` is the synaptic reversal potential, and for excitatotry AMPA-like synapses is equal to 0 mV. `V_post` holds the postsynaptic membrane voltage and `I_syn` is the current that is being received by the postsynaptic neuron. For excitatory AMPA synapses where `E_syn` = 0 mV and `V_post` is about -65 mV at rest, `I_syn` will be a negative number. This matters, because when applied in the `dynamical_system.py`, it is subtracted from the other currents. Subtracting a negative number results in a positive contribution - leading to the depolarization of the postsynaptic neuron. 
+The `forward_euler.py` in the `multi-neuron-experiments` folder takes the forward euler scheme and applies it to N neurons. A few new constants have been implemented: `s`, `E_syn`, `V_post` and `I_syn`, where `s` is the synapse update rule and is saturated at 1 (min(s+1,1)) when a spike is detected and is at constant exponential decay despite the spikes (ds/dt = −s/τ_syn). `E_syn` is the synaptic reversal potential, and for excitatotry AMPA-like synapses is equal to 0 mV. `V_post` holds the postsynaptic membrane voltage and `I_syn` is the current that is being received by the postsynaptic neuron. For excitatory AMPA synapses where `E_syn` = 0 mV and `V_post` is about -65 mV at rest, `I_syn` will be a negative number. This matters, because when applied in the `dynamical_system.py`, it is subtracted from the other currents. Subtracting a negative number results in a positive contribution - leading to the depolarization of the postsynaptic neuron. 
 The first loop goes through the time steps and the nested loop applies the calculations to each neuron. Only the first neuron in the chain of neurons receives external drive, the rest receive synaptic output from their predecessor. After each variable has been updated, we check for a spike and we update s. We return the histories for each neuron for visualization. 
 
 ### Synaptic model
@@ -114,7 +114,7 @@ The two functions in `synaptic_model.py` are `detect_spike`, which takes the cur
 
 *Oscillation occured under a constant current of 7 μA/cm^2 where N = 5 and N_syn = 100*
 
-The chain `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
+The multi-neuron `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
 
 ### Key observations:
 - The spike train propagation down the chain and the latency drift in spikes in the neurons as they get farther away in the chain from the initial neuron are visible in the Multi-neuron oscillation experiment.
@@ -126,22 +126,22 @@ git clone https://github.com/hamii31/Hodgkin_Huxley_Action_Potential.git
 pip install matplotlib numpy
 
 # to reproduce a single action potential in a single neuron
-python -m single.action_potential.py
+python -m single-neuron-experiments.action_potential.py
 
 # to reproduce the threshold experiment in a single neuron
-python -m single.threshold.py
+python -m single-neuron-experiments.threshold.py
 
 # to reproduce the subthreshold experiment in a single neuron
-python -m single.subthreshold.py
+python -m single-neuron-experiments.subthreshold.py
 
 # to reproduce the refractory experiment in a single neuron
-python -m single.refractory_period.py
+python -m single-neuron-experiments.refractory_period.py
 
 # to reproduce the oscillation experiment in a single neuron
-python -m single.oscillation.py
+python -m single-neuron-experiments.oscillation.py
 
 # reproduce the oscillation experiment in a chain of neurons
-python -m chain.oscillation.py
+python -m multi-neuron-experiments.oscillation.py
 ```
 
 ## License
