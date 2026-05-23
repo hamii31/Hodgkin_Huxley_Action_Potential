@@ -114,6 +114,22 @@ The two functions in `synaptic_model.py` are `detect_spike`, which takes the cur
 
 *The last neuron in the chain fired when the first neuron in the chain received a 1 ms pulse of 7 μA/cm^2*
 
+![Chain Threshold Experiment B](figures/chain_threshold_b.png)
+
+*Noticeable latency as the N_syn count was halved from 100 to 50*
+
+![Chain Threshold Experiment C](figures/chain_threshold_c.png)
+
+*Even bigger latency drift can be observed at N_syn = 25*
+
+![Chain Threshold Experiment D](figures/chain_threshold_d.png)
+
+*The biggest latency observed in this experiment was when the presynaptic connections were 10*
+
+![Chain Threshold Experiment E](figures/chain_threshold_e.png)
+
+*The synaptic transmission stopped when N_syn was halved from 10 to 5. Even an impulse of 100 μA/cm^2 could not trigger the second neuron to fire an action potential*
+
 The multi-neuron `threshold.py` finds the 1 ms microamp pulse threshold at which the entire chain of neuron fires an AP individually. The first experiment was conducted at N_syn = 100, which lead to the discovery of a threshold equal to 7 μA/cm^2. Naturally, I decided to find the N_syn threshold, as as the injected pulse threshold, needed for a chain of 5 neurons to fire. I found that the chain fired an action potential at N_syn = 50 and μA = 7.00, but the latency had increased. I then decided to half the N_syn count once more, and the result was the same - the action potential was fired by each neuron in the chain at a greater latency. I set N_syn to 10 and continued observing an increased latency in firing. However, the final halving of N_syn from 10 to 5 resulted in the chain not completely firing. Even an impulse of 100 microamps was not enough to make the second neuron fire, let alone the last one in the chain.
 
 ### Multi-Neuron Oscillation Experiment:
