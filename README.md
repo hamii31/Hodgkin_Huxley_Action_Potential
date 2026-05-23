@@ -86,7 +86,7 @@ iteration (several digits after the decimal point).
 
 `oscillation.py` applies a constant current to the forward Euler model, demonstrating the different frequency of action potentials fired at different constant microamps injected into the neuron.
 
-## Key observations:
+### Key observations:
 
 - The threshold for a 1 ms pulse is ~6.98 μA/cm^2, with an all-or-nothing transition characteristic of AP dynamics. This is further demonstrated by the subthreshold experiment.
 - The refractory period at near-threshold stimuli is dominated by slow recovery of h (sodium inactivation gate) and slow decay of n (potassium activation) following a previous AP, matching Hodgkin-Huxley 1952's observations.
@@ -108,13 +108,16 @@ The third constant is the density of the synaptic conductance - `g_syn_density`.
 The final constant is tau_syn, which is the time constant for synaptic gating decay equal to 5 ms. 
 The two functions in `synaptic_model.py` are `detect_spike`, which takes the current and previous addition to the V_history and checks if they are both above 0 mV (which would mean that a spike is underway), and `update_synapse` which updates `s` if a spike is underway, otherwise keeps it a constant decay.  
 
-### Multi-neuron Oscillation Experiment:
+### Multi-Neuron Oscillation Experiment:
 
 ![Chain Oscillation Experiment](figures/chain_oscillation.png)
 
 *Oscillation occured under a constant current of 7 μA/cm^2 where N = 5 and N_syn = 100*
 
 The chain `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
+
+### Key observations:
+- The spike train propagation down the chain and the latency drift in spikes in the neurons as they get farther away in the chain from the initial neuron are visible in the Multi-neuron oscillation experiment.
 
 ## How to run:
 
