@@ -112,7 +112,7 @@ The two functions in `synaptic_model.py` are `detect_spike`, which takes the cur
 
 ![Chain Oscillation Experiment](figures/chain_oscillation.png)
 
-*Oscillation occured under a constant current of 7 μA/cm^2 where N_syn = 100*
+*Oscillation occured under a constant current of 7 μA/cm^2 where N = 5 and N_syn = 100*
 
 The chain `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
 
