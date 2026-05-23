@@ -9,39 +9,39 @@ This is my first computational neuroscience project — a Python implementation 
 
 ## Shared modules:
 
-### rate_constants
+### `rate_constants.py`
 
-The `rate_constants.py` calculates the opening and closing rate of the three type of gates (sodium-activated -> m, sodium-inhibited -> h, potassium-activated -> n). 
+Calculates the opening and closing rate of the three type of gates (sodium-activated -> m, sodium-inhibited -> h, potassium-activated -> n). 
 These constants are then used to calculate the steady-state and time constants later on. L'Hôpital's rule was used to avoid removable singularity cases for alpha_m and 
 alpha_n -> A solution that checks the current voltage and returns a hardcoded value. 
 
-### steady_state
+### `steady_state.py`
 
-The `steady_state.py` contains the functions that calculate the steady state values of each gate and the timeframe in which they open/close, derived from the rate constants by setting dx/dt = 0.
+Contains the functions that calculate the steady state values of each gate and the timeframe in which they open/close, derived from the rate constants by setting dx/dt = 0.
 
-### gating_ODEs
+### `gating_ODEs.py`
 
-The `gating_ODEs.py` calculates the gating variable ODEs for m, h and n, which will later be used in `dynamical_system.py`.
+Calculates the gating variable ODEs for m, h and n, which will later be used in `dynamical_system.py`.
 
-### ionic_channels
+### `ionic_channels.py`
 
-The `ionic_channels.py` computes the three ionic currents (sodium, potassium, leak) as functions of voltage and the current gating variable values, using the channel formulations from the paper (m^3 * h for sodium n^4 for potassium).
+Ccomputes the three ionic currents (sodium, potassium, leak) as functions of voltage and the current gating variable values, using the channel formulations from the paper (m^3 * h for sodium n^4 for potassium).
 
-### dynamical_system
+### `dynamical_system.py`
 
-`dynamical_system.py` calculates the current state (V, m, h, n) and returns the four derivatives dV/dt, dm/dt, dh/dt and dn/dt. It also calculates internally the injected current
+Calculates the current state (V, m, h, n) and returns the four derivatives dV/dt, dm/dt, dh/dt and dn/dt. It also calculates internally the injected current
 by the experiment-conductor.
 
-### forward_euler
+### `forward_euler.py`
 
-`forward_euler.py` calculates the current state by invoking `dynamical_system.py` on every dt step (0.01ms for testing). It stores the history of the experiment into `V_history`, `t_history`, as well as `m_history`, `h_history` and `n_history` inspired by Hodgkin-Huxley's paper, which tracked the gap by observing the h (sodium inactivation gates) and n (potassium conductance) during the firing of an action potential, which this project shows in action. The sodium inactivation and potassium conductance are tracked and plotted alongside the APs, the final product closely resembles the graph (Fig 19) in the paper.
+Calculates the current state by invoking `dynamical_system.py` on every dt step (0.01ms for testing). It stores the history of the experiment into `V_history`, `t_history`, as well as `m_history`, `h_history` and `n_history` inspired by Hodgkin-Huxley's paper, which tracked the gap by observing the h (sodium inactivation gates) and n (potassium conductance) during the firing of an action potential, which this project shows in action. The sodium inactivation and potassium conductance are tracked and plotted alongside the APs, the final product closely resembles the graph (Fig 19) in the paper.
 
-### Plotting
-`plot.py` holds the plotting function.
+### `plot.py`
+Holds the plotting function.
 
-### Testing
+### `testing.py`
 
-`testing.py` validates the core modules `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is compared with the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
+Validates the core modules `rate_constants.py`, `steady_state.py`, `ionic_channels.py`, `gating_ODEs.py` and `dynamical_system.py`. The validation is done at at a resting membrane voltage (-65mV), where the output of each formula is compared with the expected values. The outputs of each script are grouped in dictionaries (if more than 1 output is tested) and each directory is checked for 'False' values. If any 'False' values exist, a second dict is created in which only the False occurences are stored and that dictionary is printed, showing the user exactly which key-value pairs contain 'False'. 
 
 ## Single Neuron Experiments:
 
