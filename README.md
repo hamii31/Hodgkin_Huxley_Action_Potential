@@ -1,6 +1,6 @@
 # Hodgkin Huxley Action Potential
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20284016.svg)](https://doi.org/10.5281/zenodo.20284016)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20284015.svg)](https://doi.org/10.5281/zenodo.20284015)
 
 This is my first computational neuroscience project — a Python implementation of the 1952 Hodgkin and Huxley paper on action potential generation in neurons. The biophysical equations follow the paper; the implementation, debugging, and experimental analysis are my own. The project was structured around an exercise sheet that decomposed the paper into sequential milestones. I have reproduced all of the experiments from the paper on a single neuron and am currently extending the work to a chain of HH neurons connected by AMPA-like synapses, in order to study propagation latency and the conditions under which synaptic transmission succeeds or fails.
 
