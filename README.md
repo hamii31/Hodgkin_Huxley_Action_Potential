@@ -93,6 +93,25 @@ iteration (several digits after the decimal point).
 - The second firing in the refractory experiment matches the curve of the threshold firing experiment, which indicates that the resources were barely enough for that AP to occur - the sodium and potassium reached the levels needed for an AP to fire, however the 9.5 μA were just enough for the AP to fire. Anything less would have resulted in a subthreshold graph instead.
 - In the oscillation experiment, sustained currents below 6 μA produce only a transient response (one or two APs followed by a membrane voltage at rest), while sustained currents at or above 7 μA produce continuous repetitive firing. The major difference between these two firing modes is characteristic for Type II neurons.
 
+## Multi-neuron Experiments:
+
+### Custom Forward Euler:
+
+The `forward_euler.py` in the `chain` folder takes the forward euler scheme and applies it to N neurons. A few new constants have been implemented: `s`, `E_syn`, `V_post` and `I_syn`, where `s` is the synapse update rule and is saturated at 1 (min(s+1,1)) when a spike is detected and is at constant exponential decay despite the spikes (ds/dt = −s/τ_syn). `E_syn` is the synaptic reversal potential, and for excitatotry AMPA-like synapses is equal to 0 mV. `V_post` holds the postsynaptic membrane voltage and `I_syn` is the current that is being received by the postsynaptic neuron. For excitatory AMPA synapses where `E_syn` = 0 mV and `V_post` is about -65 mV at rest, `I_syn` will be a negative number. This matters, because when applied in the `dynamical_system.py`, it is subtracted from the other currents. Subtracting a negative number results in a positive contribution - leading to the depolarization of the postsynaptic neuron. 
+The first loop goes through the time steps and the nested loop applies the calculations to each neuron. Only the first neuron in the chain of neurons receives external drive, the rest receive synaptic output from their predecessor. After each variable has been updated, we check for a spike and we update s. We return the histories for each neuron for visualization. 
+
+### Synaptic model
+
+`synaptic_model.py` holds the constants and functions related to the synapses. The first constant is the single synapse conductance `g_syn`, which is calculated by the multiplication of `N` (number of synaptic connections, which is the range 10...100 for AMPA-like synapses) and `y` (single channel conductance in picosiemens, which is converted in milisiemens for the equations to work properly). 
+The second constant is `G_total` and it tells us how many synapses contribute. It is the product of multiplication of `N_syn` (number of presynaptic neurons connected to the postsynaptic cell) and the single synapse conductance - for each synaptic connection, what is the synaptic conductance. For a 1-to-1 neural chain, `N_syn = 1`, for a more realistic chain, `N_syn = 100...10000`. 
+The third constant is the density of the synaptic conductance - `g_syn_density`. It is the division of `G_total` with `A_membrane` (the area of the membrane). To calculate `A_membrane` we will use the radius of a large axon, which is 25 micrometers or 0.0025 centimeters (we are using square centimeters in the HH equations) and calculate `A_membrane` by using the sphere surface area formula: 4 * π * r^2. `g_syn_density` is used in `multi_FE.py` to compute the received current from the presynaptic neuron. 
+The final constant is tau_syn, which is the time constant for synaptic gating decay equal to 5 ms. 
+The two functions in `synaptic_model.py` are `detect_spike`, which takes the current and previous addition to the V_history and checks if they are both above 0 mV (which would mean that a spike is underway), and `update_synapse` which updates `s` if a spike is underway, otherwise keeps it a constant decay.  
+
+### Multi-neuron Oscillation Experiment:
+
+The chain `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
+
 ## How to run:
 
 ```
@@ -113,6 +132,9 @@ python -m single.refractory_period.py
 
 # to reproduce the oscillation experiment in a single neuron
 python -m single.oscillation.py
+
+# reproduce the oscillation experiment in a chain of neurons
+python -m chain.oscillation.py
 ```
 
 ## License
