@@ -55,36 +55,36 @@ Validates the core modules `rate_constants.py`, `steady_state.py`, `ionic_channe
 
 ### Threshold Experiment
 
+`threshold.py` iterates through increments of the injected µA in range 0 to 10 in order to find the µA value at which the action potential is initialized. `np.arange` is used for fine
+iteration (several digits after the decimal point).
+
 ![Threshold Experiment](figures/threshold.png)
 
 *The initialization of an action potential as a result of passing the pulse threshold (6.98 µA/cm^2, injected for 1ms)*
 
-`threshold.py` iterates through increments of the injected µA in range 0 to 10 in order to find the µA value at which the action potential is initialized. `np.arange` is used for fine
-iteration (several digits after the decimal point).
-
 ### Subthreshold Experiment
+
+`subthreshold.py` finds the µA that generates the last subthreshold before a real AP can be fired. The iteration follows the same logic as `threshold.py`, but it retrieves the subthreshold that predates the AP threshold and is then used to generate the subthreshold plot.
 
 ![Subthreshold Responses](figures/subthreshold.png)
 
 *A subthreshold response observed when the membrane potential is less than the threshold for setting up a spike. It is apparent that the potassium conductance and sodium reserves were not enough for an AP to fire.*
 
-`subthreshold.py` finds the µA that generates the last subthreshold before a real AP can be fired. The iteration follows the same logic as `threshold.py`, but it retrieves the subthreshold that predates the AP threshold and is then used to generate the subthreshold plot.
-
 ### Refractory Period Experiment
+
+`refractory_period.py` conducts an experiment which aims to discover the timeframe in which a second AP can be generated after the initial AP. This experiment demonstrates that potassium conductance reaches resting levels after an AP and that the sodium channels must recover from inactivation (h returning to near-rest values) before another AP can fire.
 
 ![Refractory Period](figures/refractory_period.png)
 
 *Refractory period observed within a 15ms gap after the previous action potential generated at 9.5 μA/cm^2, marked by the delayed rise of potassium conductance and slow sodium recovery after the first AP.*
 
-`refractory_period.py` conducts an experiment which aims to discover the timeframe in which a second AP can be generated after the initial AP. This experiment demonstrates that potassium conductance reaches resting levels after an AP and that the sodium channels must recover from inactivation (h returning to near-rest values) before another AP can fire.
-
 ### Oscillation Experiment
+
+`oscillation.py` applies a constant current to the forward Euler model, demonstrating the different frequency of action potentials fired at different constant microamps injected into the neuron.
 
 ![Oscillation Experiment](figures/oscillation.png)
 
 *Oscillation occured under a constant current of 7 μA/cm^2*
-
-`oscillation.py` applies a constant current to the forward Euler model, demonstrating the different frequency of action potentials fired at different constant microamps injected into the neuron.
 
 ### Key observations:
 
@@ -134,14 +134,15 @@ The multi-neuron `threshold.py` finds the 1 ms microamp pulse threshold at which
 
 ### Multi-Neuron Oscillation Experiment:
 
+The multi-neuron `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
+
 ![Chain Oscillation Experiment](figures/chain_oscillation.png)
 
 *Oscillation occured under a constant current of 7 μA/cm^2 where N = 5 and N_syn = 100*
 
-The multi-neuron `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
-
 ### Key observations:
 - The Multi-Neuron Threshold Experiment shows us how the first neuron receives just the right amount of current to fire an AP, however downstream neurons fire cleaner, more uniform spikes because each receives summed input from N_syn = 100 converging synapses, and because the synaptic gating saturates on spike detection — making the downstream response insensitive to the upstream spike's exact shape. This mimics how real synaptic transmission produces reliable downstream firing through synaptic convergence, even though individual synapses reduce the signal magnitude from input to output.
+- The Multi-Neuron Threshold Experiment demonstrates the important role of the quantity of presynaptic connections in the interneural communication - the large quantity of synaptic connections in our brains imrpoves the latency at which transmissions are conveyed and allows the communication to exist in the first place.
 - The spike train propagation down the chain and the latency drift in spikes in the neurons as they get farther away in the chain from the initial neuron are visible in the Multi-Neuron Oscillation Experiment.
 
 ## How to run:
