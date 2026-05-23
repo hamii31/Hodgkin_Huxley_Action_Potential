@@ -108,6 +108,14 @@ The third constant is the density of the synaptic conductance - `g_syn_density`.
 The final constant is tau_syn, which is the time constant for synaptic gating decay equal to 5 ms. 
 The two functions in `synaptic_model.py` are `detect_spike`, which takes the current and previous addition to the V_history and checks if they are both above 0 mV (which would mean that a spike is underway), and `update_synapse` which updates `s` if a spike is underway, otherwise keeps it a constant decay.  
 
+### Multi-Neuron Threshold Experiment:
+
+![Chain Threshold Experiment](figures/chain_threshold.png)
+
+*The last neuron in the chain fired when the first neuron in the chain received a 1ms pulse of 7 μA/cm^2*
+
+The multi-neuron `threshold.py` finds the 1ms microamp pulse threshold at which the entire chain of neuron fires. 
+
 ### Multi-Neuron Oscillation Experiment:
 
 ![Chain Oscillation Experiment](figures/chain_oscillation.png)
@@ -126,22 +134,21 @@ git clone https://github.com/hamii31/Hodgkin_Huxley_Action_Potential.git
 pip install matplotlib numpy
 
 # to reproduce a single action potential in a single neuron
-python -m single-neuron-experiments.action_potential.py
+python -m single-neuron-experiments.action_potential
 
-# to reproduce the threshold experiment in a single neuron
-python -m single-neuron-experiments.threshold.py
+# to reproduce the threshold experiment in a single neuron or a chain of neurons
+python -m single-neuron-experiments.threshold
+python -m multi-neuron-experiments.threshold
 
 # to reproduce the subthreshold experiment in a single neuron
-python -m single-neuron-experiments.subthreshold.py
+python -m single-neuron-experiments.subthreshold
 
 # to reproduce the refractory experiment in a single neuron
-python -m single-neuron-experiments.refractory_period.py
+python -m single-neuron-experiments.refractory_period
 
-# to reproduce the oscillation experiment in a single neuron
-python -m single-neuron-experiments.oscillation.py
-
-# reproduce the oscillation experiment in a chain of neurons
-python -m multi-neuron-experiments.oscillation.py
+# to reproduce the oscillation experiment in a single neuron or a chain of neurons
+python -m single-neuron-experiments.oscillation
+python -m multi-neuron-experiments.oscillation
 ```
 
 ## License
