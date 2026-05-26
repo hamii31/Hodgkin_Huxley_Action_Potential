@@ -112,7 +112,7 @@ The two functions in `synaptic_model.py` are `detect_spike`, which takes the cur
 
 The multi-neuron `threshold.py` finds the 1 ms microamp pulse threshold at which the last neuron in a chain of five neurons connected with AMPA-like synapses fires an AP. The first experiment was conducted at N_syn = 100, which lead to the discovery of a threshold equal to 7 μA/cm^2. Naturally, I decided to find the N_syn threshold, as as the injected pulse threshold, needed for a chain of 5 neurons to fire. I found that the chain fired an action potential at N_syn = 50 and μA = 7.00, but the latency had increased. I then decided to half the N_syn count once more, and the result was the same - the action potential was fired by each neuron in the chain at a greater latency. I set N_syn to 10 and continued observing an increased latency in firing. However, the final halving of N_syn from 10 to 5 resulted in the chain not completely firing. Even an impulse of 100 microamps was not enough to make the second neuron fire, let alone the last one in the chain.
 
-![Chain Threshold Experiment](figures/chain_threshold.png)
+![Chain Threshold Experiment A](figures/chain_threshold.png)
 
 *The last neuron in the chain fired when the first neuron in the chain received a 1 ms pulse of 7 μA/cm^2*
 
@@ -134,16 +134,37 @@ The multi-neuron `threshold.py` finds the 1 ms microamp pulse threshold at which
 
 ### Multi-Neuron Oscillation Experiment:
 
-The multi-neuron `oscillation.py` conducts the oscillation experiment on N neurons and visualizes V, h and n. 
+The multi-neuron `oscillation.py` conducts the oscillation experiment on N neurons with N_syn synaptic connections between each, and visualizes the repeating action potentials passed by each downstream neuron. The first oscillation experiment is conducted with 100 synaptic connections and a constant current at 7 microamps per square centimeter resulting in a repetitive firing of all neurons in the chain with a minimal delay. Just like in the threshold experiment, halving the synaptic connections, but retaining the constant current, leads to a slight drift in AP initiation in the downstream neurons. A second halving, making N_syn = 25, leads to a more pronounced AP initiation latency downstream in the chain. It is when we bring the synaptic connections to 10 that we observe an interesting phenomenon - frequency-dependent transmission failure. The second neuron in the chain cannot recover in time for the 60Hz firing of the first neuron (6 spikes per 100ms), so it fires only half of the time - 3 spikes per 100ms, or 30Hz. This sets the pace for the rest of the chain, leading to all but the first neuron to fire at 30Hz. Keeping the synaptic connections at 10, but bringing the constant current to 13 microamps per cm^2 breaks the oscillation alltogether - the first neuron is firing at 80Hz, which is a pace that the second neuron cannot keep up with, resulting in the second neuron firing once in response to the first AP, but fails to recover in time for the rest. At 8 synaptic connection even the first AP is not registered by the second neuron, so the chain of neurons stays dormant, despite the first neuron's constant firing.
 
-![Chain Oscillation Experiment](figures/chain_oscillation_a.png)
+![Chain Oscillation Experiment A](figures/chain_oscillation_a.png)
 
-*Oscillation occured under a constant current of 7 μA/cm^2 where N = 5 and N_syn = 100*
+*Multi-Neuron oscillation occured at 60Hz per neuron under a constant current of 7 μA/cm^2 where N = 5 and N_syn = 100*
+
+![Chain Oscillation Experiment B](figures/chain_oscillation_b.png)
+
+*Slight latency observed when N_syn is halved to 50, however the frequency is retained during the chain oscillation*
+
+![Chain Oscillation Experiment C](figures/chain_oscillation_c.png)
+
+*Latency continues to increase, still no effect on frequency and overall oscillation*
+
+![Chain Oscillation Experiment D](figures/chain_oscillation_d_1.png)
+
+*Frequency degradation occurs at N_syn = 10 and 7 μA/cm^2*
+
+![Chain Oscillation Experiment D](figures/chain_oscillation_d_2.png)
+
+*Frequency degradation continues to increase as the constant current increases*
+
+![Chain Oscillation Experiment E](figures/chain_oscillation_e.png)
+
+*Transmission fails at N_syn = 8 with disregard for constant current*
 
 ### Key observations:
 - The Multi-Neuron Threshold Experiment shows us how the first neuron receives just the right amount of current to fire an AP, however downstream neurons fire cleaner, more uniform spikes because each receives summed input from N_syn = 100 converging synapses, and because the synaptic gating saturates on spike detection — making the downstream response insensitive to the upstream spike's exact shape. This mimics how real synaptic transmission produces reliable downstream firing through synaptic convergence, even though individual synapses reduce the signal magnitude from input to output.
 - The Multi-Neuron Threshold Experiment demonstrates the important role of the quantity of presynaptic connections in the interneural communication - the large quantity of synaptic connections in our brains imrpoves the latency at which transmissions are conveyed and allows the communication to exist in the first place.
 - The spike train propagation down the chain and the latency drift in spikes in the neurons as they get farther away in the chain from the initial neuron are visible in the Multi-Neuron Oscillation Experiment.
+- Frequency-dependent transmission failure can be observed when the synaptic connections are too low (N_syn <= 10). As the constant current increases the frequency degradation does so too, becaue the frequency-dependnant transmission failure occurs when the postsynaptic neuron cannot recover in time for the next action potential. Sending more action potentials at higher frequency further disrupts the recovery process of the postsynaptic neuron. Since in this chain of neurons each neuron receives inputs from a single presynaptic neuron and sends them to its postsynaptic counterpart, the proper function of this chain depends heavily on the 1-to-1 interneuron transmission. If that transmission breaks, so does the transmission between the downstream neurons. 
 
 ## How to run:
 
