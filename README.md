@@ -219,7 +219,7 @@ In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In thi
 
 ![Y-Shape Oscillation Experiment F](figures/y_shape_oscillation_f.png)
 
-*No initial AP detected at 3 μA/cm^2*
+*Initial AP detection does not occur at 2 synaptic connections per neuron*
 
 ## How to run:
 
