@@ -97,7 +97,7 @@ iteration (several digits after the decimal point).
 
 ### Custom Forward Euler:
 
-The `forward_euler.py` in the `multi-neuron-experiments` folder takes the forward euler scheme and applies it to N neurons. A few new constants have been implemented: `s`, `E_syn`, `V_post` and `I_syn`, where `s` is the synapse update rule and is saturated at 1 (min(s+1,1)) when a spike is detected and is at constant exponential decay despite the spikes (ds/dt = −s/τ_syn). `E_syn` is the synaptic reversal potential, and for excitatotry AMPA-like synapses is equal to 0 mV. `V_post` holds the postsynaptic membrane voltage and `I_syn` is the current that is being received by the postsynaptic neuron. For excitatory AMPA synapses where `E_syn` = 0 mV and `V_post` is about -65 mV at rest, `I_syn` will be a negative number. This matters, because when applied in the `dynamical_system.py`, it is subtracted from the other currents. Subtracting a negative number results in a positive contribution - leading to the depolarization of the postsynaptic neuron. 
+The `forward_euler.py` in the `chain` folder takes the forward euler scheme and applies it to N neurons. A few new constants have been implemented: `s`, `E_syn`, `V_post` and `I_syn`, where `s` is the synapse update rule and is saturated at 1 (min(s+1,1)) when a spike is detected and is at constant exponential decay despite the spikes (ds/dt = −s/τ_syn). `E_syn` is the synaptic reversal potential, and for excitatotry AMPA-like synapses is equal to 0 mV. `V_post` holds the postsynaptic membrane voltage and `I_syn` is the current that is being received by the postsynaptic neuron. For excitatory AMPA synapses where `E_syn` = 0 mV and `V_post` is about -65 mV at rest, `I_syn` will be a negative number. This matters, because when applied in the `dynamical_system.py`, it is subtracted from the other currents. Subtracting a negative number results in a positive contribution - leading to the depolarization of the postsynaptic neuron. 
 The first loop goes through the time steps and the nested loop applies the calculations to each neuron. Only the first neuron in the chain of neurons receives external drive, the rest receive synaptic output from their predecessor. After each variable has been updated, we check for a spike and we update s. We return the histories for each neuron for visualization. 
 
 ### Synaptic model
@@ -167,12 +167,12 @@ The multi-neuron `oscillation.py` conducts the oscillation experiment on N neuro
 - Frequency-dependent transmission failure can be observed in a chain of 5 neurons connected via 10 or less AMPA-like synapses. This failure occurs when the postsynaptic neuron cannot recover in time for the next action potential. Sending more action potentials at higher frequency further disrupts the recovery process of the postsynaptic neuron, which has been reproduced in the Multi-neuron oscillation experiment using 10 synaptic connections and a constant current of 7 μA/cm^2 and above. 
 Since in this chain of neurons each neuron receives an input from its presynaptic neuron and sends that signal to its postsynaptic counterpart, the proper oscillation of this chain depends heavily on the 1-to-1 inter-neuron communication. Failure in that transmission could lead to lower frequency firing in the downstream neurons or even no firing at all. 
 
-## Simple Neural Network Experiments:
+## Simple Network Experiments:
 
-### Fan-in of X Experiments
+### Fan-in of X Oscillation Experiment
+The `forward_euler.py` in the `fan_in` folder now receives an additional parameter - `connections`, which is a list of tuples representing the connections between multiple neurons feeding into one neuron. `I_syn` is now calculated for each neuron based on its synaptic connections and is now passed in the `dynamical_system` for every neuron. 
+
 The first experiment was as follows: In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In this experiment the number of synaptic connections gradually decreases from 100 to _. The first successful AP transmission in the Y-shape circuit with 100 synaptic connections per neuron (200 feeding directly into neuron 3) occurs at a constant current of 3 μA/cm^2 delivered externally to both neurons 1 and 2. At 7 μA/cm^2 an oscillation at 60 Hz can be observed. At 50, 25 and even 15 synaptic connections per neuron, the same observations can be made - full AP transmission at 3 μA/cm^2 and full 60 Hz oscillation at 7 μA/cm^2. At a total of 10 connections the full AP transmission still occurs at 3 μA/cm^2, with some latency drift. However a frequency-dependent transmission failure occurs when the constant current hits 7 μA/cm^2 - the third neuron is firing at 30 Hz, while its predecessors fire at 60 Hz. At 13 μA/cm^2, as expected given the observations in the multi-neuron experiments - that increasing the oscillation frequency in the previous neurons further contributes to the transmission failure, the third neuron completely stops oscillating. At 2 synaptic connections, the third neuron is completely unresponsive to the transmissions from the other two neurons and even the initial AP is not detected.
-
-`forward_euler.py` now receives an additional parameter - `connections`, which is a list of tuples representing the connections between multiple neurons feeding into one neuron. `I_syn` is now calculated for each neuron based on its synaptic connections and is now passed in the `dynamical_system` for every neuron. 
 
 ![Y-Shape Oscillation Experiment A](figures/y_shape_oscillation_a.png)
 
@@ -258,22 +258,22 @@ git clone https://github.com/hamii31/Hodgkin_Huxley_Action_Potential.git
 pip install matplotlib numpy
 
 # to reproduce a single action potential in a single neuron
-python -m single-neuron-experiments.action_potential
+python -m single.action_potential
 
 # to reproduce the threshold experiment in a single neuron or a chain of neurons
-python -m single-neuron-experiments.threshold
-python -m multi-neuron-experiments.threshold
+python -m single.threshold
+python -m chain.threshold
 
 # to reproduce the subthreshold experiment in a single neuron
-python -m single-neuron-experiments.subthreshold
+python -m single.subthreshold
 
 # to reproduce the refractory experiment in a single neuron
-python -m single-neuron-experiments.refractory_period
+python -m single.refractory_period
 
 # to reproduce the oscillation experiment in a single neuron, chain of neurons, or a Fan-in of X architecture
-python -m single-neuron-experiments.oscillation
-python -m multi-neuron-experiments.oscillation
-python -m fan-in-experiments.oscillation
+python -m single.oscillation
+python -m multi.oscillation
+python -m fan_in.oscillation
 ```
 
 ## License
