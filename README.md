@@ -197,6 +197,14 @@ In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In thi
 
 *Full oscillation occurs at 7 μA/cm^2*
 
+![Y-Shape Oscillation Experiment D](figures/y_shape_oscillation_d.png)
+
+*Initial AP detected at 3 μA/cm^2*
+
+![Y-Shape Oscillation Experiment D](figures/y_shape_oscillation_d_1.png)
+
+*Full oscillation occurs at 7 μA/cm^2*
+
 ## How to run:
 
 ```
