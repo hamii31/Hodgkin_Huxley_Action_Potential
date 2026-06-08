@@ -203,7 +203,23 @@ In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In thi
 
 ![Y-Shape Oscillation Experiment D](figures/y_shape_oscillation_d_1.png)
 
-*Full oscillation occurs at 7 μA/cm^2*
+*Full oscillation occurs at 7 μA/cm^2 with a noticeable latency*
+
+![Y-Shape Oscillation Experiment E](figures/y_shape_oscillation_e.png)
+
+*Initial AP detected at 3 μA/cm^2*
+
+![Y-Shape Oscillation Experiment E](figures/y_shape_oscillation_e_1.png)
+
+*Frequency-dependent transmission failure observed at 7 μA/cm^2*
+
+![Y-Shape Oscillation Experiment E](figures/y_shape_oscillation_e_2.png)
+
+*Oscillation in the third neuron stops at 13 μA/cm^2*
+
+![Y-Shape Oscillation Experiment F](figures/y_shape_oscillation_f.png)
+
+*No initial AP detected at 3 μA/cm^2*
 
 ## How to run:
 
