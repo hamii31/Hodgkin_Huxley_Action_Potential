@@ -223,6 +223,18 @@ In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In thi
 
 *Initial AP detection does not occur at 2 synaptic connections per neuron*
 
+
+The question that followed this experiment was "What if we keep the synaptic connections low, but add more neurons that feed into one neuron?". This lead to the three-fork architecture - 3 neurons feeding into a singular neuron. At 5 synaptic connections per neuron, 15 total were connected to the final neuron. This lead to a full oscillation at 60 Hz at 7 μA/cm^2, however at a collective total of 6 synaptic connections an initial action potential does not occur.
+
+![3-Fork Oscillation Experiment A](figures/three_fork_oscillation_a.png)
+
+*60 Hz oscillation observed at 7 μA/cm^2*
+
+![3-Fork Oscillation Experiment B](figures/three_fork_oscillation_b.png)
+
+*No initial AP observed*
+
+
 ## How to run:
 
 ```
