@@ -169,9 +169,11 @@ Since in this chain of neurons each neuron receives an input from its presynapti
 
 ## Simple Neuron Network Experiments:
 
-### Y-Shaped Connectivity Transmission
+### Y-Shaped Connectivity Transmission Experiment
 
 In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In this experiment the number of synaptic connections gradually decreases from 100 to _. The first successful AP transmission in the Y-shape circuit with 100 synaptic connections per neuron (200 feeding directly into neuron 3) occurs at a constant current of 3 μA/cm^2 delivered externally to both neurons 1 and 2. At 7 μA/cm^2 an oscillation at 60 Hz can be observed. At 50, 25 and even 15 synaptic connections per neuron, the same observations can be made - full AP transmission at 3 μA/cm^2 and full 60 Hz oscillation at 7 μA/cm^2. At 5 synaptic connections the full AP transmission still occurs at 3 μA/cm^2, with some latency drift. However a frequency-dependent transmission failure occurs when the constant current hits 7 μA/cm^2 - the third neuron is firing at 30 Hz, while its predecessors fire at 60 Hz. At 13 μA/cm^2, as expected given the observations in the multi-neuron experiments - that increasing the oscillation frequency in the previous neurons further contributes to the transmission failure, the third neuron completely stops oscillating. At 2 synaptic connections, the third neuron is completely unresponsive to the transmissions from the other two neurons and even the initial AP is not detected.
+
+`forward_euler.py` now receives an additional parameter - `connections`, which is a list of tuples representing the connections between the individual neurons. `I_syn` is now calculated for each neuron based on its synaptic connections. `I_syn` is now passed for every neuron.  
 
 ![Y-Shape Oscillation Experiment A](figures/y_shape_oscillation_a.png)
 
