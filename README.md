@@ -167,13 +167,12 @@ The multi-neuron `oscillation.py` conducts the oscillation experiment on N neuro
 - Frequency-dependent transmission failure can be observed in a chain of 5 neurons connected via 10 or less AMPA-like synapses. This failure occurs when the postsynaptic neuron cannot recover in time for the next action potential. Sending more action potentials at higher frequency further disrupts the recovery process of the postsynaptic neuron, which has been reproduced in the Multi-neuron oscillation experiment using 10 synaptic connections and a constant current of 7 μA/cm^2 and above. 
 Since in this chain of neurons each neuron receives an input from its presynaptic neuron and sends that signal to its postsynaptic counterpart, the proper oscillation of this chain depends heavily on the 1-to-1 inter-neuron communication. Failure in that transmission could lead to lower frequency firing in the downstream neurons or even no firing at all. 
 
-## Simple Neuron Network Experiments:
+## Simple Neural Network Experiments:
 
-### Y-Shaped Connectivity Transmission Experiment
+### Fan-in of X Experiments
+The first experiment was as follows: In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In this experiment the number of synaptic connections gradually decreases from 100 to _. The first successful AP transmission in the Y-shape circuit with 100 synaptic connections per neuron (200 feeding directly into neuron 3) occurs at a constant current of 3 μA/cm^2 delivered externally to both neurons 1 and 2. At 7 μA/cm^2 an oscillation at 60 Hz can be observed. At 50, 25 and even 15 synaptic connections per neuron, the same observations can be made - full AP transmission at 3 μA/cm^2 and full 60 Hz oscillation at 7 μA/cm^2. At a total of 10 connections the full AP transmission still occurs at 3 μA/cm^2, with some latency drift. However a frequency-dependent transmission failure occurs when the constant current hits 7 μA/cm^2 - the third neuron is firing at 30 Hz, while its predecessors fire at 60 Hz. At 13 μA/cm^2, as expected given the observations in the multi-neuron experiments - that increasing the oscillation frequency in the previous neurons further contributes to the transmission failure, the third neuron completely stops oscillating. At 2 synaptic connections, the third neuron is completely unresponsive to the transmissions from the other two neurons and even the initial AP is not detected.
 
-In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In this experiment the number of synaptic connections gradually decreases from 100 to _. The first successful AP transmission in the Y-shape circuit with 100 synaptic connections per neuron (200 feeding directly into neuron 3) occurs at a constant current of 3 μA/cm^2 delivered externally to both neurons 1 and 2. At 7 μA/cm^2 an oscillation at 60 Hz can be observed. At 50, 25 and even 15 synaptic connections per neuron, the same observations can be made - full AP transmission at 3 μA/cm^2 and full 60 Hz oscillation at 7 μA/cm^2. At 5 synaptic connections the full AP transmission still occurs at 3 μA/cm^2, with some latency drift. However a frequency-dependent transmission failure occurs when the constant current hits 7 μA/cm^2 - the third neuron is firing at 30 Hz, while its predecessors fire at 60 Hz. At 13 μA/cm^2, as expected given the observations in the multi-neuron experiments - that increasing the oscillation frequency in the previous neurons further contributes to the transmission failure, the third neuron completely stops oscillating. At 2 synaptic connections, the third neuron is completely unresponsive to the transmissions from the other two neurons and even the initial AP is not detected.
-
-`forward_euler.py` now receives an additional parameter - `connections`, which is a list of tuples representing the connections between the individual neurons. `I_syn` is now calculated for each neuron based on its synaptic connections. `I_syn` is now passed for every neuron.  
+`forward_euler.py` now receives an additional parameter - `connections`, which is a list of tuples representing the connections between multiple neurons feeding into one neuron. `I_syn` is now calculated for each neuron based on its synaptic connections and is now passed in the `dynamical_system` for every neuron. 
 
 ![Y-Shape Oscillation Experiment A](figures/y_shape_oscillation_a.png)
 
@@ -223,17 +222,34 @@ In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In thi
 
 *Initial AP detection does not occur at 2 synaptic connections per neuron*
 
+The question that followed this experiment was "What if we keep the synaptic connections low, but add more neurons that feed into one neuron?". This lead to the fan-in of 3 architecture - 3 neurons feeding into a singular neuron. 5 AMPA-like synaptic connections per neuron (15 total) connected to the final neuron lead to a full oscillation at 60 Hz at 7 μA/cm^2, however at 2 AMPA-like synaptic connections (6 total) an initial action potential did not occur.
 
-The question that followed this experiment was "What if we keep the synaptic connections low, but add more neurons that feed into one neuron?". This lead to the three-fork architecture - 3 neurons feeding into a singular neuron. At 5 synaptic connections per neuron, 15 total were connected to the final neuron. This lead to a full oscillation at 60 Hz at 7 μA/cm^2, however at a collective total of 6 synaptic connections an initial action potential does not occur.
-
-![3-Fork Oscillation Experiment A](figures/three_fork_oscillation_a.png)
+![Fan-in of 3 Oscillation Experiment A](figures/fan_in_three_oscillation_a.png)
 
 *60 Hz oscillation observed at 7 μA/cm^2*
 
-![3-Fork Oscillation Experiment B](figures/three_fork_oscillation_b.png)
+![Fan-in of 3 Oscillation Experiment B](figures/fan_in_three_oscillation_b.png)
 
 *No initial AP observed*
 
+The goal now was to find how many neurons feeding into a singular neuron, each with 2 AMPA-like synaptic connections, were needed for the final neuron to not only fire a singular AP, but repetitively fire in a frequency that matches its predecessors frequency. A 5-to-1 architecture, which I called a "Fan-in of 5" architecture, resulted in an action potential being fired by the last neuron when the external constant current for the five neurons was 3 μA/cm^2. When the current reached 7 μA/cm^2, the result of when the Y-shape circuit had 10 total connections - frequency-dependent transmission failure - could be observed in the Fan-in of 5 as well: the final neuron is firing twice as slow as the other neurons and increasing the injected current won't solve the problem. Only increasing the synaptic connections will. This information is crucial for this experiment, because it tells us that a total of 10 AMPA-like synaptic connections result in a transmission failure in the recepient independent of the neural structure, so increasing the count of neurons that send signals to the last neuron, therefore increasing the total synaptic connections, should counter this failure. The solution is a Fan-in of 7 architecture - 7 neurons, each with 2 AMPA-like synaptic connections, feeding into an 8th neuron (14 total synaptic connections). This leads to an oscillation of 60 Hz even when the synaptic connections are two.
+
+![Fan-in of 5 Oscillation Experiment A](figures/fan_in_five_oscillation_a.png)
+
+*Initial AP fired*
+
+![Fan-in of 5 Oscillation Experiment B](figures/fan_in_five_oscillation_b.png)
+
+*Oscillation at 30 Hz*
+
+![Fan-in of 7 Oscillation Experiment A](figures/fan_in_seven_oscillation_a.png)
+
+*60 Hz oscillation at 7 μA/cm^2*
+
+### Key observations:
+- At 15 synaptic connections a 60 Hz oscillation can be simulated in a Fan-in of 2.
+- At 10 synaptic connections, transmission failure occurs independent of the number of neurons in the Fan-in architecture. 
+- As observed before, lowering the synaptic connections between neurons results in a transmission failure. The Fan-in of X architecture allows the neurons to communicate properly even when the synaptic connections are too low, as long as X is big enough. 
 
 ## How to run:
 
@@ -254,9 +270,10 @@ python -m single-neuron-experiments.subthreshold
 # to reproduce the refractory experiment in a single neuron
 python -m single-neuron-experiments.refractory_period
 
-# to reproduce the oscillation experiment in a single neuron or a chain of neurons
+# to reproduce the oscillation experiment in a single neuron, chain of neurons, or a Fan-in of X architecture
 python -m single-neuron-experiments.oscillation
 python -m multi-neuron-experiments.oscillation
+python -m fan-in-experiments.oscillation
 ```
 
 ## License
