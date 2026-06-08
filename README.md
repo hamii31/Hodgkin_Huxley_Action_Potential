@@ -167,6 +167,36 @@ The multi-neuron `oscillation.py` conducts the oscillation experiment on N neuro
 - Frequency-dependent transmission failure can be observed in a chain of 5 neurons connected via 10 or less AMPA-like synapses. This failure occurs when the postsynaptic neuron cannot recover in time for the next action potential. Sending more action potentials at higher frequency further disrupts the recovery process of the postsynaptic neuron, which has been reproduced in the Multi-neuron oscillation experiment using 10 synaptic connections and a constant current of 7 μA/cm^2 and above. 
 Since in this chain of neurons each neuron receives an input from its presynaptic neuron and sends that signal to its postsynaptic counterpart, the proper oscillation of this chain depends heavily on the 1-to-1 inter-neuron communication. Failure in that transmission could lead to lower frequency firing in the downstream neurons or even no firing at all. 
 
+## Simple Neuron Network Experiments:
+
+### Y-Shaped Connectivity Transmission
+
+In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In this experiment the number of synaptic connections gradually decreases from 100 to _. The first successful AP transmission in the Y-shape circuit with 100 synaptic connections per neuron (200 feeding directly into neuron 3) occurs at a constant current of 3 μA/cm^2 delivered externally to both neurons 1 and 2. At 7 μA/cm^2 an oscillation at 60 Hz can be observed. At 50, 25 and even 15 synaptic connections per neuron, the same observations can be made - full AP transmission at 3 μA/cm^2 and full 60 Hz oscillation at 7 μA/cm^2. At 5 synaptic connections the full AP transmission still occurs at 3 μA/cm^2, with some latency drift. However a frequency-dependent transmission failure occurs when the constant current hits 7 μA/cm^2 - the third neuron is firing at 30 Hz, while its predecessors fire at 60 Hz. At 13 μA/cm^2, as expected given the observations in the multi-neuron experiments - that increasing the oscillation frequency in the previous neurons further contributes to the transmission failure, the third neuron completely stops oscillating. At 2 synaptic connections, the third neuron is completely unresponsive to the transmissions from the other two neurons and even the initial AP is not detected.
+
+![Y-Shape Oscillation Experiment A](figures/y_shape_oscillation_a.png)
+
+*Initial AP detected at 3 μA/cm^2*
+
+![Y-Shape Oscillation Experiment A](figures/y_shape_oscillation_a_1.png)
+
+*Full oscillation occurs at 7 μA/cm^2*
+
+![Y-Shape Oscillation Experiment B](figures/y_shape_oscillation_b.png)
+
+*Initial AP detected at 3 μA/cm^2*
+
+![Y-Shape Oscillation Experiment B](figures/y_shape_oscillation_b_1.png)
+
+*Full oscillation occurs at 7 μA/cm^2*
+
+![Y-Shape Oscillation Experiment C](figures/y_shape_oscillation_c.png)
+
+*Initial AP detected at 3 μA/cm^2*
+
+![Y-Shape Oscillation Experiment C](figures/y_shape_oscillation_c_1.png)
+
+*Full oscillation occurs at 7 μA/cm^2*
+
 ## How to run:
 
 ```
