@@ -297,11 +297,13 @@ python -m single.subthreshold
 # to reproduce the refractory experiment in a single neuron
 python -m single.refractory_period
 
-# to reproduce the oscillation experiment in a single neuron, chain of neurons, Fan-in of X architecture or a feedforward neural network
+# to reproduce the oscillation experiment in a single neuron, chain of neurons, Fan-in of X architecture
 python -m single.oscillation
 python -m multi.oscillation
 python -m fan_in.oscillation
-python -m network.oscillation
+
+# feedforward neural network oscillation experiment 
+python -m fan_in.layer_oscillation
 ```
 
 ## License
