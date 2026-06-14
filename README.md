@@ -7,6 +7,22 @@ This is my first computational neuroscience project — a Python implementation 
 **Language:** Python 3.14.0 (Matplotlib, Numpy)
 **Reference:** Hodgkin AL, Huxley AF (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. Journal of Physiology 117:500–544. [(DOI)](https://doi.org/10.1113/jphysiol.1952.sp004764)
 
+## Experiments
+
+- [Single Neuron Experiments](#single-neuron-experiments)
+  - [Action Potential Experiment](#action-potential-experiment)
+  - [Threshold Experiment](#threshold-experiment)
+  - [Subthreshold Experiment](#subthreshold-experiment)
+  - [Refractory Experiment](#refractory-experiment)
+  - [Oscillation Experiment](#oscillation-experiment)
+- [Chain Experiments](#chain-experiments)
+  - [Multi-Neuron Threshold Experiment](#multi-neuron-threshold-experiment)
+  - [Multi-Neuron Oscillation Experiment](#multi-neuron-oscillation-experiment)
+- [Network Experiments](#network-experiments)
+  - [Fan-in of X Oscillation Experiment](#fan-in-of-x-oscillation-experiment)
+  - [Feedforward Neural Network Oscillation Experiment](#feedforward-neural-network-oscillation-experiment)
+- [How to run](#how-to-run)
+
 ## Shared modules:
 
 ### `rate_constants.py`
@@ -167,9 +183,7 @@ The multi-neuron `oscillation.py` conducts the oscillation experiment on N neuro
 - Frequency-dependent transmission failure can be observed in a chain of 5 neurons connected via 10 or less AMPA-like synapses. This failure occurs when the postsynaptic neuron cannot recover in time for the next action potential. Sending more action potentials at higher frequency further disrupts the recovery process of the postsynaptic neuron, which has been reproduced in the Multi-neuron oscillation experiment using 10 synaptic connections and a constant current of 7 μA/cm^2 and above. 
 Since in this chain of neurons each neuron receives an input from its presynaptic neuron and sends that signal to its postsynaptic counterpart, the proper oscillation of this chain depends heavily on the 1-to-1 inter-neuron communication. Failure in that transmission could lead to lower frequency firing in the downstream neurons or even no firing at all. 
 
-## Simple Network Experiments:
-
-### Fan-in of X Oscillation Experiment
+## Fan-in of X Oscillation Experiment
 The `forward_euler.py` in the `fan_in` folder now receives an additional parameter - `connections`, which is a list of tuples representing the connections between multiple neurons feeding into one neuron. `I_syn` is now calculated for each neuron based on its synaptic connections and is now passed in the `dynamical_system` for every neuron. 
 
 The first experiment was as follows: In a circuit of 3 neurons, neurons 1 and 2 both feed signals to neuron 3. In this experiment the number of synaptic connections gradually decreases from 100 to _. The first successful AP transmission in the Y-shape circuit with 100 synaptic connections per neuron (200 feeding directly into neuron 3) occurs at a constant current of 3 μA/cm^2 delivered externally to both neurons 1 and 2. At 7 μA/cm^2 an oscillation at 60 Hz can be observed. At 50, 25 and even 15 synaptic connections per neuron, the same observations can be made - full AP transmission at 3 μA/cm^2 and full 60 Hz oscillation at 7 μA/cm^2. At a total of 10 connections the full AP transmission still occurs at 3 μA/cm^2, with some latency drift. However a frequency-dependent transmission failure occurs when the constant current hits 7 μA/cm^2 - the third neuron is firing at 30 Hz, while its predecessors fire at 60 Hz. At 13 μA/cm^2, as expected given the observations in the multi-neuron experiments - that increasing the oscillation frequency in the previous neurons further contributes to the transmission failure, the third neuron completely stops oscillating. At 2 synaptic connections, the third neuron is completely unresponsive to the transmissions from the other two neurons and even the initial AP is not detected.
@@ -249,7 +263,20 @@ The goal now was to find how many neurons feeding into a singular neuron, each w
 ### Key observations:
 - At 15 synaptic connections a 60 Hz oscillation can be simulated in a Fan-in of 2.
 - At 10 synaptic connections, transmission failure occurs independent of the number of neurons in the Fan-in architecture. 
-- As observed before, lowering the synaptic connections between neurons results in a transmission failure. The Fan-in of X architecture allows the neurons to communicate properly even when the synaptic connections are too low, as long as X is big enough. 
+- As observed before, lowering the synaptic connections between neurons results in a transmission failure. The Fan-in of X architecture allows the neurons to communicate properly even when the synaptic connections are too low, as long as X is big enough.
+
+## Feedforward Neural Network Oscillation Experiment:
+
+`layer_oscillation.py` implements and runs a 3-layer feedforward neural network with 8 neurons per layer, all connected via AMPA-like synapses. The architecture is inspired by the Fan-in architecture. Every neuron in the first layer receives external current stimulation and transmits it to all neurons in the second layer in a fan-out structure. The neurons in the second layer receive that transmission in a fan-in structure and send it to the third layer of neurons. Given the extensive synaptic branching between neurons, even at N_syn = 2 an oscillation of 60 Hz can be observed with a slight delay. Transmission stops at N_syn = 1, because the total synapses feeding a single neuron are below the necessary 15, as established in the previous experiments. 
+
+![Feedforward Neural Network Oscillation A](figures/ff_nn_oscillation_a_1.png)
+![Feedforward Neural Network Oscillation A](figures/ff_nn_oscillation_a_2.png)
+
+/*Oscillation at 60 Hz observed in both neural networks despite lower synaptic connections count*/
+
+![Feedforward Neural Network Oscillation B](figures/ff_nn_oscillation_b.png)
+
+/*Transmission halts when the synaptic connections count drops below the established threshold*/
 
 ## How to run:
 
@@ -270,10 +297,11 @@ python -m single.subthreshold
 # to reproduce the refractory experiment in a single neuron
 python -m single.refractory_period
 
-# to reproduce the oscillation experiment in a single neuron, chain of neurons, or a Fan-in of X architecture
+# to reproduce the oscillation experiment in a single neuron, chain of neurons, Fan-in of X architecture or a feedforward neural network
 python -m single.oscillation
 python -m multi.oscillation
 python -m fan_in.oscillation
+python -m network.oscillation
 ```
 
 ## License
